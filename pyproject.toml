@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "projet"
+version = "0.1.0"
+description = "DLA Project"
+authors = ["PAM <pamarie14@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+ipykernel="^6.29.5"
+torch="2.2.2"
+torchvision="0.17.2"
+numpy="<2.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+package-mode="false"
