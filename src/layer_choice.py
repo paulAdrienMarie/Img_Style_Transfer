@@ -176,6 +176,12 @@ if __name__ == "__main__":
         
         # Deprocess the image
         output_image = deprocess(img.detach())
+
+        # Sauvegarde l'image dans un fichier
+        filename = f"reconstructed_{layer}.png"
+        unloader = transforms.ToPILImage()
+        image_to_save = unloader(output_image.squeeze(0))
+        image_to_save.save(filename)
         
         # Display the image
         image_display(output_image, layer)
