@@ -209,7 +209,7 @@ if __name__ == "__main__":
         if not os.path.exists("../data/reconstructed_style/"):
             os.makedirs("../data/reconstructed_style/")
 
-        filename = f"reconstructed_{layer}.png"
+        filename = f"../data/reconstructed_style/reconstructed_{layer}.png"
         unloader = transforms.ToPILImage()
         image_to_save = unloader(output_image.squeeze(0))
         image_to_save.save(filename)

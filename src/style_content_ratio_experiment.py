@@ -17,7 +17,7 @@ output_folder = Path("../data/style_content_ratios")
 output_folder.mkdir(parents=True, exist_ok=True)
 
 # Change style or content weights
-style_weights = [10 ** 5, 10 ** 6, 10 ** 8]
+style_weights = [10 ** 4]
 content_weight = 1  
 
 # Content et style images names
@@ -34,4 +34,4 @@ for i, style_weight in enumerate(style_weights):
     # Saving path
     save_path = output_folder / f"{ratio_name}.jpeg"
     
-    save_image(output, title=f"Style Weight: {style_weight:.0e}", save_path=save_path)
+    save_image(output, save_path=save_path)
