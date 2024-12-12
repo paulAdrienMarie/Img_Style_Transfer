@@ -1,11 +1,11 @@
 import torch
-from torchvision import transforms
 from torchvision import models
 from torchvision.models import vgg19, VGG19_Weights
 import torch.nn.functional as F
 import torch.nn as nn
 import torch.optim as optim
 import copy
+from ..utils.utils import image_loader
 
 from PIL import Image
 
@@ -15,15 +15,6 @@ def style_transfer(content_image_name, style_image_name, style_weight, content_w
 
     # shape of the output image
     imshape = (512, 512)
-
-    def image_loader(image_name):
-        # scale imported image
-        # transform it into a torch tensor
-        loader = transforms.Compose([transforms.Resize(imshape),  transforms.ToTensor()])
-
-        image = Image.open(image_name)
-        image = loader(image).unsqueeze(0)   # add an additional dimension for fake batch (here 1)
-        return image.to(device, torch.float) # move the image tensor to the correct device
 
     image_path = "../data/"
     content_image = image_loader(image_path + content_image_name)

@@ -6,8 +6,7 @@ from torchvision.models import vgg19, VGG19_Weights
 import torch.nn.functional as F
 import torch.nn as nn
 import os
-import torch.optim as optim
-import copy
+from ..utils.utils import image_display, image_loader
 
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -17,24 +16,6 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # shape of the output image
 imshape = (224, 224)
-
-def image_loader(image_name):
-    # scale imported image
-    # transform it into a torch tensor
-    loader = transforms.Compose([transforms.Resize(imshape),  transforms.ToTensor()])
-
-    image = Image.open(image_name)
-    image = loader(image).unsqueeze(0)   # add an additional dimension for fake batch (here 1)
-    return image.to(device, torch.float) # move the image tensor to the correct device
-
-def image_display(tensor, title=None):
-    unloader = transforms.ToPILImage()  # reconvert into PIL image
-    image = tensor.cpu().clone()        # clone the tensor
-    image = unloader(image.squeeze(0))  # remove the fake batch dimension
-    plt.show()
-    plt.imshow(image)
-    if title is not None:
-        plt.title(title)
 
 class VGGActivations_content(nn.Module):
     
