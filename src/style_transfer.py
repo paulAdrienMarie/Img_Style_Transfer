@@ -73,7 +73,7 @@ def style_transfer(content_image_name, style_image_name, style_weight, content_w
     class Normalization(nn.Module):
         def __init__(self, mean, std):
             super(Normalization, self).__init__()
-            # set mean and std as tensors, reshaped to match image dimensions
+            # Set mean and std as tensors, reshaped to match image dimensions
             self.mean = torch.tensor(mean).view(-1, 1, 1)
             self.std = torch.tensor(std).view(-1, 1, 1)
 

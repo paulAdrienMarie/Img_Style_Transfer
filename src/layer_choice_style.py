@@ -136,22 +136,22 @@ if __name__ == "__main__":
     i = 0
 
     for layer in model.features.eval().children():
-        # Vérifier si on doit passer au bloc suivant
+        # Check if we need to move on to the next block
         if current_block < len(blocks) and index_conv == blocks[current_block]:
-            index_conv = 0  # Réinitialiser le compteur pour le nouveau bloc
+            index_conv = 0  # Reinitialize the index for the current block
             current_block += 1
 
-        if isinstance(layer, nn.Conv2d):  # Pour les couches convolutionnelles
+        if isinstance(layer, nn.Conv2d):
             index_conv += 1
             name = f'conv{current_block + 1}_{index_conv}'
             renamed_model.add_module(name, layer)
 
-        elif isinstance(layer, nn.ReLU):  # Pour les couches ReLU
+        elif isinstance(layer, nn.ReLU):
             index_relu += 1
             name = f'relu{current_block + 1}_{index_relu}'
-            renamed_model.add_module(name, nn.ReLU(inplace=False))  # Utiliser inplace=False pour compatibilité
+            renamed_model.add_module(name, nn.ReLU(inplace=False))
 
-        elif isinstance(layer, nn.MaxPool2d):  # Pour les couches MaxPooling
+        elif isinstance(layer, nn.MaxPool2d):
             name = f'pool{current_block + 1}'
             renamed_model.add_module(name, layer)
         i += 1
@@ -159,7 +159,7 @@ if __name__ == "__main__":
     print(renamed_model)
 
 
-    # Prétraitement pour les images VGG
+    # Preprocess the images for the VGG19 model
     preprocess = transforms.Compose([
         transforms.Resize((224, 224)),
         transforms.ToTensor(),
@@ -184,7 +184,7 @@ if __name__ == "__main__":
         # Deprocess the image
         output_image = deprocess(img.detach())
 
-        # Sauvegarde l'image dans un fichier
+        # Save the image in a file
         if not os.path.exists("../data/reconstructed_style/"):
             os.makedirs("../data/reconstructed_style/")
 
