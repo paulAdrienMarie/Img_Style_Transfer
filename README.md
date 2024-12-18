@@ -27,17 +27,21 @@ This project implements neural style transfer based on the method presented by *
 
 While being at the root of our project install the needed packages in a virtual environnement using poetry to run our project by running the following commands : 
 
-`
+```
 poetry install
 poetry shell
-` 
+``` 
 
 To run the style transfer experiment, run : 
 
-`cd src
-python style_transfer.py`
+```
+cd src
+python style_transfer.py
+```
 
 To run the experiment for the choice of the different layers (style and content), run :
 
-`cd src
-python layer_choice_content.py`
+```
+cd src
+python layer_choice_content.py
+```
