@@ -12,12 +12,10 @@ def save_image(tensor, save_path=None):
     if save_path:
         image.save(save_path)
 
-# Folder to save the results
 output_folder = Path("../data/style_content_ratios")
 output_folder.mkdir(parents=True, exist_ok=True)
 
-# Change style or content weights
-style_weights = [10 ** 4]
+style_weights = [10 ** 2, 10 ** 3, 10 ** 4, 10 ** 5, 10 ** 6, 10 ** 7]
 content_weight = 1  
 
 # Content et style images names
@@ -31,7 +29,6 @@ for i, style_weight in enumerate(style_weights):
     
     output = style_transfer(content_image_name, style_image_name, style_weight, content_weight)
     
-    # Saving path
     save_path = output_folder / f"{ratio_name}.jpeg"
     
     save_image(output, save_path=save_path)
